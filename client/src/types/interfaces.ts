@@ -5,9 +5,16 @@ export interface NoteInput {
     text?: string
   }
 
-export interface AddNoteDialogProps {
+export interface AddEditNoteDialogProps {
+  noteToEdit?: Note,
   onDismiss: () => void
   onNoteSave: (note: Note) => void
 }
 
+export interface NoteProps {
+  note: Note,
+  noNoteClicked: (note: Note) => void,
+  onDeleteNoteClicked: (note: Note) => void,
+  className?: string
+}
  

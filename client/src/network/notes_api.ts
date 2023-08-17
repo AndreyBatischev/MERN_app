@@ -19,7 +19,7 @@ export async function fetchNotes(): Promise<Note[]> {
 }
 
 export async function createNote(note: NoteInput): Promise<Note> {
-    const response = await fetchData("/api/notes", 
+    const response = await fetchData("/api/notes/", 
     {
         method: "POST",
         headers: {
@@ -29,4 +29,20 @@ export async function createNote(note: NoteInput): Promise<Note> {
     })
 
     return response.json()
+}
+
+export async function updateNote(note: NoteInput, id: string): Promise<Note> {
+    const response = await fetchData('/api/notes/' + id, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(note)
+    })
+    return response.json()
+}
+
+export async function deleteNote(id:string) {
+    await fetch('/api/notes/' + id, {method: 'DELETE'})
+    
 }
