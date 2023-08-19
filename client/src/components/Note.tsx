@@ -7,7 +7,7 @@ import {NoteProps} from '../types/interfaces'
 
 
 
-const Note = ({note, className, noNoteClicked, onDeleteNoteClicked}: NoteProps) => {
+const Note = ({note, className, onNoteClicked, onDeleteNoteClicked}: NoteProps) => {
     const {title, text, createdAt, updatedAt} = note
 
 let createdUpdatedText: string
@@ -21,7 +21,7 @@ if(updatedAt > createdAt) {
 return(
     <Card 
     className={`${style.noteCard} ${className}`}
-    onClick={() => noNoteClicked(note) }
+    onClick={() => onNoteClicked(note) }
     >
         <Card.Body className={style.cardBody}>
             <Card.Title className={ styleUtils.flexCenter }>

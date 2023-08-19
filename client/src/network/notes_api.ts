@@ -38,6 +38,8 @@ export async function updateNote(note: NoteInput, id: string): Promise<Note> {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(note)
+        
+        
     })
     return response.json()
 }

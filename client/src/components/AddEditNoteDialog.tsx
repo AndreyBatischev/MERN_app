@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import * as NoteApi from '../network/notes_api'
 import { Note } from "../modules/note";
 
-const AddEditNoteDialog = ({onDismiss, onNoteSave, noteToEdit}: AddEditNoteDialogProps) => {
+const AddEditNoteDialog = ({noteToEdit, onDismiss, onNoteSave}: AddEditNoteDialogProps) => {
     const { register, handleSubmit, formState: {errors, isSubmitting} } = useForm<NoteInput>({
         defaultValues: {
             title: noteToEdit?.title || "",
@@ -14,7 +14,7 @@ const AddEditNoteDialog = ({onDismiss, onNoteSave, noteToEdit}: AddEditNoteDialo
 
     async function onSubmit(input:NoteInput) {
         try {
-            let noteResponse: Note
+            let noteResponse: Note;
 
             if(noteToEdit) {
                 noteResponse = await NoteApi.updateNote(input, noteToEdit._id)

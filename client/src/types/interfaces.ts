@@ -7,13 +7,13 @@ export interface NoteInput {
 
 export interface AddEditNoteDialogProps {
   noteToEdit?: Note,
-  onDismiss: () => void
+  onDismiss: () => void,
   onNoteSave: (note: Note) => void
 }
 
 export interface NoteProps {
   note: Note,
-  noNoteClicked: (note: Note) => void,
+  onNoteClicked: (note: Note) => void,
   onDeleteNoteClicked: (note: Note) => void,
   className?: string
 }
