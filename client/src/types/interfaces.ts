@@ -1,4 +1,4 @@
-import { Note } from "../modules/note"
+import { Note } from "../models/note"
 
 export interface NoteInput {
     title?: string,

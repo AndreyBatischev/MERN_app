@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Note  as NoteModel } from './modules/note';
+import { Note  as NoteModel } from './models/note';
 import Note from './components/Note';
 import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
 import styles from './styles/NotesPage.module.css'
@@ -7,6 +7,7 @@ import styleUtils from './styles/utils.module.css'
 import * as NotesApi from './network/notes_api'
 import AddEditNoteDialog from './components/AddEditNoteDialog';
 import {FaPlus} from 'react-icons/fa'
+import { SingUpModal } from './components/SingUpModal';
 
 function App() {
   const [notes, setNotes] = useState<NoteModel[]>([])
@@ -56,9 +57,9 @@ const [showNotesLoadingError, setShowNotesLoadingError] = useState(false)
   return (
     <Container className={styles.notePage} >
       <Button 
-      className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter}`}
-      onClick={() => setShowAddNoteDialog(true)}
-      >
+        className={`mb-4 ${styleUtils.blockCenter} ${styleUtils.flexCenter}`}
+        onClick={() => setShowAddNoteDialog(true)}
+        >
         <FaPlus />
         Add new note
       </Button>
@@ -76,11 +77,11 @@ const [showNotesLoadingError, setShowNotesLoadingError] = useState(false)
       {
         showAddNoteDialog && 
         <AddEditNoteDialog 
-        onDismiss={() => setShowAddNoteDialog(false)}
-        onNoteSave={(newNote) => {
-          setNotes([...notes, newNote])
-          setShowAddNoteDialog(false)
-        }}
+          onDismiss={() => setShowAddNoteDialog(false)}
+          onNoteSave={(newNote) => {
+            setNotes([...notes, newNote])
+            setShowAddNoteDialog(false)
+          }}
         />
       }
       {noteToEdit &&
@@ -92,6 +93,14 @@ const [showNotesLoadingError, setShowNotesLoadingError] = useState(false)
           setNoteToEdit(null)
         }}
       />
+
+      }
+
+      {true && 
+        <SingUpModal 
+          onDismiss={() => {}}
+          onSingUpSuccessful={() => {}}
+        />
 
       }
     </Container>

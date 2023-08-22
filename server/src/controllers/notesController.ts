@@ -58,14 +58,16 @@ export const updateNotes: RequestHandler<UpdateNoteParams, unknown, CreateNoteBo
             throw createHttpError(400, 'Note must have a title')
         }
 
-        const note = await NoteModel.findById(id, {title, text})
-
+        const note =  await NoteModel.findByIdAndUpdate(id, {title, text}, {
+          new: true,
+          includeResultMetadata: false  
+        });
+        
         if(!note){
             throw createHttpError(404, "Note not found")
         }
-        const updateNote = await note.save()
 
-        res.status(200).json(updateNote)
+        res.status(200).json(note)
     } catch (error) {
       next(error)
     }
