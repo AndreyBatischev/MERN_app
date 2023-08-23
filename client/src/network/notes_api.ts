@@ -15,18 +15,18 @@ async function fetchData(input:RequestInfo, init?: RequestInit) {
 }
 
 export async function getLoggedInUser(): Promise<User> {
-    const response = await fetchData("/api/users", {method: "GET"})
+    const response = await fetchData("/api/users", { method: "GET" })
     return response.json()
 }
 
-export interface SingUpCredentials {
+export interface SignUpCredentials {
     username: string,
     email: string,
     password: string
 }
 
-export async function singUp(credentials: SingUpCredentials): Promise<User> {
-    const response = await fetchData("/api/users/singup",
+export async function singUp(credentials: SignUpCredentials): Promise<User> {
+    const response = await fetchData("/api/users/signup",
     {
         method: "POST",
         headers: {

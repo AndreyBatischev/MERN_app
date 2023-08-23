@@ -1,4 +1,5 @@
 import { Note } from "../models/note"
+import { User } from "../models/user"
 
 export interface NoteInput {
     title?: string,
@@ -18,3 +19,7 @@ export interface NoteProps {
   className?: string
 }
  
+export interface SignUpModalProps {
+  onDismiss: () => void,
+  onSingUpSuccessful: (user: User) => void
+}

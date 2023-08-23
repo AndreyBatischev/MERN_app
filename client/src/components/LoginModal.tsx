@@ -1,35 +1,33 @@
 import { useForm } from "react-hook-form"
-import { SignUpCredentials } from "../network/notes_api"
+import { LoginCredentials } from "../network/notes_api"
 import * as NotesApi from "../network/notes_api"
-import { Button, Form, Modal, ModalBody, ModalHeader, ModalTitle } from "react-bootstrap"
+import {SignUpModalProps} from "../types/interfaces"
+import { Button, Form, Modal } from "react-bootstrap"
 import TextInputField from "./form/TextInputField"
 import styleUtiles from "../styles/utils.module.css"
-import {SignUpModalProps} from "../types/interfaces"
 
 
-export const SingUpModal = ({onDismiss, onSingUpSuccessful}: SignUpModalProps) => {
-    const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<SignUpCredentials>()
 
-    async function onSubmit(credentials:SignUpCredentials ) {
+const  LoginModal = ({onDismiss, onSingUpSuccessful}: SignUpModalProps) => {
+
+    const {register, handleSubmit, formState: {errors, isSubmitting}}  = useForm<LoginCredentials>()
+
+    async function onSubmit(credentials: LoginCredentials){
         try {
-            
-            const newUser = await NotesApi.singUp(credentials)
-            onSingUpSuccessful(newUser)
-            
+            const user = await NotesApi.login(credentials)
         } catch (error) {
-            console.log("🚀 ~ file: SingUpModal.tsx:17 ~ onSubmit ~ error:", error)
+            console.log("🚀 ~ file: LoginModal.tsx:14 ~ onSubmit ~ error:", error)
         }
-        
     }
 
   return (
-    <Modal show onHide={onDismiss}>
-        <ModalHeader closeButton>
-            <ModalTitle>
-                Sing Up
-            </ModalTitle>
-        </ModalHeader>
-        <ModalBody>
+    <Modal show onHide={onDismiss} >
+        <Modal.Header closeButton>
+            <Modal.Title>
+                Log In
+            </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <TextInputField 
                     name="username"
@@ -39,15 +37,6 @@ export const SingUpModal = ({onDismiss, onSingUpSuccessful}: SignUpModalProps) =
                     register={register}
                     registerOptions={{required: "Required"}}
                     error={errors.username}
-                />
-                <TextInputField 
-                    name="email"
-                    label="Email"
-                    type="email"
-                    placeholder="Email"
-                    register={register}
-                    registerOptions={{required: "Required"}}
-                    error={errors.email}
                 />
                 <TextInputField 
                     name="password"
@@ -63,10 +52,13 @@ export const SingUpModal = ({onDismiss, onSingUpSuccessful}: SignUpModalProps) =
                     disabled={isSubmitting}
                     className={styleUtiles.width100}
                 >
-                    Sing Up
+                    Log In
                 </Button>
             </Form>
-        </ModalBody>
+        </Modal.Body>
+
     </Modal>
   )
 }
+
+export default LoginModal
