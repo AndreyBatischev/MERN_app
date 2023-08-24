@@ -8,8 +8,8 @@ import { Button } from "react-bootstrap"
 export const NavBarLoggedOutVieiw = ({onSignUpClicked, onLoginClicked}: NavBarLoggedOutVieiwProps) => {
   return (
     <>
-        <Button onClick={onSignUpClicked}>Sing Up</Button>
-        <Button onClick={onLoginClicked}>Log In</Button>
+        <Button onClick={onSignUpClicked}>Log In</Button>
+        <Button onClick={onLoginClicked}>Sing Up</Button>
     </>
   )
 }

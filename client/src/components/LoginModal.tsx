@@ -15,6 +15,7 @@ const  LoginModal = ({onDismiss, onSingUpSuccessful}: SignUpModalProps) => {
     async function onSubmit(credentials: LoginCredentials){
         try {
             const user = await NotesApi.login(credentials)
+            onSingUpSuccessful(user)
         } catch (error) {
             console.log("🚀 ~ file: LoginModal.tsx:14 ~ onSubmit ~ error:", error)
         }
